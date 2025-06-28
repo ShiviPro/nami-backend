@@ -13,6 +13,8 @@ initialiseDatabase();
 
 const jobsData = JSON.parse(fs.readFileSync("./jobs.json", "utf-8"));
 
+// The following code was used for seeding i.e. adding data in bulk in the initial phase. I've left it here, so that it can be looked at & reviewed, if deemed necessary by the team.
+/*
 const seedJobs = async () => {
   try {
     for (const jobData of jobsData) {
@@ -25,7 +27,8 @@ const seedJobs = async () => {
   }
 };
 
-// seedJobs();
+seedJobs();
+*/
 
 const readAllJobs = async () => {
   try {
