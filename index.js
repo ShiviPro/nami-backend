@@ -3,8 +3,10 @@ const fs = require("fs");
 const Job = require("./models/job.models");
 const express = require("express");
 require("dotenv").config();
+const cors = require("cors");
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 initialiseDatabase();
