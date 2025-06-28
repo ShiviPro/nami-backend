@@ -1,5 +1,5 @@
 const { initialiseDatabase } = require("./db/db.connect");
-const fs = require("fs");
+// const fs = require("fs");
 const Job = require("./models/job.models");
 const express = require("express");
 require("dotenv").config();
@@ -11,7 +11,7 @@ app.use(express.json());
 
 initialiseDatabase();
 
-const jobsData = JSON.parse(fs.readFileSync("./jobs.json", "utf-8"));
+// const jobsData = JSON.parse(fs.readFileSync("./jobs.json", "utf-8"));
 
 // The following code was used for seeding i.e. adding data in bulk in the initial phase. I've left it here, so that it can be looked at & reviewed, if deemed necessary by the team.
 /*
