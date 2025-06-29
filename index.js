@@ -45,7 +45,7 @@ app.get("/jobs", async (req, res) => {
     if (allJobs && allJobs.length > 0) {
       res.send(JSON.stringify(allJobs));
     } else {
-      res.status(404).send(JSON.stringify({ error: "No Jobs Found!" }));
+      res.status(404).send(JSON.stringify({ message: "No Jobs Found!" }));
     }
   } catch (error) {
     res
