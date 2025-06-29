@@ -87,6 +87,39 @@ app.get("/jobs/:jobId", async (req, res) => {
   }
 });
 
+const readJobByTitle = async (jobTitle) => {
+  try {
+    const requiredJob = await Job.findOne({ title: jobTitle });
+    return requiredJob;
+  } catch (error) {
+    throw error;
+  }
+};
+
+app.get("/jobs/title/:jobTitle", async (req, res) => {
+  try {
+    const jobTitle = req.params.jobTitle;
+    const requestedJob = await readJobByTitle(jobTitle);
+    if (requestedJob) {
+      res.status(200).send(JSON.stringify(requestedJob));
+    } else {
+      res
+        .status(404)
+        .send(
+          JSON.stringify({
+            message: `Job with title ${jobTitle} was Not Found!`,
+          })
+        );
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .send(
+        JSON.stringify({ message: "An error occurred while fetching the job" })
+      );
+  }
+});
+
 const createNewJob = async (jobData) => {
   try {
     const newJob = new Job(jobData);
