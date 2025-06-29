@@ -48,7 +48,11 @@ app.get("/jobs", async (req, res) => {
       res.status(404).send(JSON.stringify({ error: "No Jobs Found!" }));
     }
   } catch (error) {
-    res.status(500).send("An error occurred while fetching jobs:", error);
+    res
+      .status(500)
+      .send(
+        JSON.stringify({ message: "An error occurred while fetching jobs" })
+      );
   }
 });
 
@@ -68,10 +72,18 @@ app.get("/jobs/:jobId", async (req, res) => {
     if (requestedJob) {
       res.status(200).send(JSON.stringify(requestedJob));
     } else {
-      res.status(404).send(`Job with Id ${jobId} was Not Found!`);
+      res
+        .status(404)
+        .send(
+          JSON.stringify({ message: `Job with Id ${jobId} was Not Found!` })
+        );
     }
   } catch (error) {
-    res.status(500).send("An error occurred while fetching the job:", error);
+    res
+      .status(500)
+      .send(
+        JSON.stringify({ message: "An error occurred while fetching the job" })
+      );
   }
 });
 
@@ -92,11 +104,12 @@ app.post("/jobs", async (req, res) => {
     const newJob = await createNewJob(jobData);
     res.status(200).send(JSON.stringify(newJob));
   } catch (error) {
-    res
-      .status(400)
-      .send(
-        "Please provide the data in correct format: Job Title, Company Name, Location, Salary, Job Type, & Required Qualifications are all mandatory!"
-      );
+    res.status(400).send(
+      JSON.stringify({
+        message:
+          "Please provide the data in correct format: Job Title, Company Name, Location, Salary, Job Type, & Required Qualifications are all mandatory!",
+      })
+    );
   }
 });
 
@@ -117,10 +130,18 @@ app.delete("/jobs/:jobId", async (req, res) => {
     if (deletedJob) {
       res.status(200).send(JSON.stringify(deletedJob));
     } else {
-      res.status(404).send(`No Job with id ${jobId} was found!`);
+      res
+        .status(404)
+        .send(
+          JSON.stringify({ message: `No Job with id ${jobId} was found!` })
+        );
     }
   } catch (error) {
-    res.status(500).send("An error occurred while deleting Job!");
+    res
+      .status(500)
+      .send(
+        JSON.stringify({ message: "An error occurred while deleting Job!" })
+      );
   }
 });
 
