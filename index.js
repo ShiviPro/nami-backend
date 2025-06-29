@@ -87,10 +87,10 @@ app.get("/jobs/:jobId", async (req, res) => {
   }
 });
 
-const readJobByTitle = async (jobTitle) => {
+const readJobsByTitle = async (jobTitle) => {
   try {
-    const requiredJob = await Job.findOne({ title: jobTitle });
-    return requiredJob;
+    const requiredJobs = await Job.find({ title: jobTitle });
+    return requiredJobs;
   } catch (error) {
     throw error;
   }
@@ -99,17 +99,15 @@ const readJobByTitle = async (jobTitle) => {
 app.get("/jobs/title/:jobTitle", async (req, res) => {
   try {
     const jobTitle = req.params.jobTitle;
-    const requestedJob = await readJobByTitle(jobTitle);
-    if (requestedJob) {
-      res.status(200).send(JSON.stringify(requestedJob));
+    const requestedJobs = await readJobsByTitle(jobTitle);
+    if (requestedJobs && requestedJobs.length > 0) {
+      res.status(200).send(JSON.stringify(requestedJobs));
     } else {
-      res
-        .status(404)
-        .send(
-          JSON.stringify({
-            message: `Job with title ${jobTitle} was Not Found!`,
-          })
-        );
+      res.status(404).send(
+        JSON.stringify({
+          message: `Job with title ${jobTitle} was Not Found!`,
+        })
+      );
     }
   } catch (error) {
     res
